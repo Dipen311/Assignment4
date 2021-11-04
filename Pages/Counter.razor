@@ -1,0 +1,40 @@
+@page "/counter"
+
+<h1>Counter</h1>
+<p><strong>@name</strong></p>
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<p>Current Incrementer: @IncrementAmount</p>
+
+<button class="btn btn-primary" @onclick="IncrementIncreaser">Increment Incrementer</button>
+<button class="btn btn-primary" @onclick="DecreaseIncreser">Decrease Incrrementer</button>
+<h4>High Score: @highscore </h4>
+@code {
+    private int currentCount = 1;
+     
+    [Parameter] 
+    public string name {get;set;}
+    private int highscore = 1;
+    [Parameter]
+    public int IncrementAmount { get; set;} = 1;
+    private void IncrementCount()
+    {
+        currentCount += IncrementAmount;
+        if(highscore <= currentCount){
+            highscore = currentCount;
+        }
+    }
+    private void IncrementIncreaser(){
+        if(IncrementAmount < 20){
+            IncrementAmount++;
+        }
+        
+    }
+    private void DecreaseIncreser(){
+        if(IncrementAmount > 1){
+            IncrementAmount--;
+        }
+    }
+}
